@@ -16,10 +16,14 @@ cat > days-remaining.cfg <<EOF
 EOF
 ```
 
-Run `days-remaining-cli`:
+Install the command line tool:
+
+    go install -v github.com/deanwilson/days-remaining-cli
+
+Assuming your `go` path is set correctly you can run `days-remaining-cli`.
 
 ```
-go run days-remaining.go days-remaining.cfg
+days-remaining.go days-remaining.cfg
 
 Expired! - Remaining: -366
 Report due - Remaining: 2
@@ -27,7 +31,6 @@ Payments due - Remaining: 10
 ```
 
 The days shown will vary based on the date you run the command.
-
 
 ### Author
 Dean Wilson <dean.wilson+daysremaining@gmail.com>
