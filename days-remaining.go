@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/fatih/color"
 	"os"
 	"path/filepath"
 	"sort"
@@ -111,9 +112,24 @@ func main() {
 	}
 
 	sortDueItems(parsedData)
+
+	// Set colours for prettier output
+	red := color.New(color.FgRed).SprintFunc()
+	yellow := color.New(color.FgYellow).SprintFunc()
+	green := color.New(color.FgGreen).SprintFunc()
+
 	// Output results
 	for _, item := range parsedData {
 		daysRemaining := daysUntil(item.DueDate)
-		fmt.Printf("%s - Remaining: %d\n", item.Name, daysRemaining)
+
+		if daysRemaining >= 10 {
+			fmt.Print(green(fmt.Sprintf("%s - Remaining: %d\n", item.Name, daysRemaining)))
+		} else if daysRemaining > 0 {
+			fmt.Print(yellow(fmt.Sprintf("%s - Remaining: %d\n", item.Name, daysRemaining)))
+		} else {
+			fmt.Print(red(fmt.Sprintf("%s - Remaining: %d\n", item.Name, daysRemaining)))
+		}
+
+		// fmt.Printf("%s - Remaining: %d\n", item.Name, daysRemaining) # use this if colours are disabled
 	}
 }
